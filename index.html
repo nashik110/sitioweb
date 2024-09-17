@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesión</title>
+    <style>
+        /* Font import and global reset */
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+        /* Font Awesome import */
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+        /* Global reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        /* Body styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #000000;
+        }
+
+        /* Section styles */
+        section {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2px;
+            flex-wrap: wrap;
+            overflow: hidden;
+        }
+
+        /* Animated gradient effect */
+        section::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(#000, #f00, #000);
+            animation: animate 5s linear infinite;
+        }
+
+        /* Animation keyframes */
+        @keyframes animate {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(100%);
+            }
+        }
+
+        /* Sign-in form styles */
+        .signin {
+            position: relative;
+            width: 400px;
+            background: #222;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
+        }
+
+        .signin .content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .signin .content h1 {
+            font-size: 2em;
+            color: #f00;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .signin .content .form-group {
+            margin-bottom: 15px;
+        }
+
+        .signin .content .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #f1f1f1;
+        }
+
+        .signin .content .form-group input[type="text"],
+        .signin .content .form-group input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background: #333;
+            color: #fff;
+            font-size: 1em;
+        }
+
+        .signin .content .form-group button {
+            background: #f00;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-weight: 600;
+            font-size: 1.35em;
+        }
+
+        .signin .content .form-group button:hover {
+            background: #ffffff;
+        }
+
+        .signin .content .form-group .register-link {
+            margin-top: 10px;
+            text-align: center;
+            color: #f00;
+        }
+
+        .signin .content .form-group .register-link a {
+            color: #f00;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .signin .content .form-group .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Social media buttons styles */
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .social-buttons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #333;
+            color: #fff;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 20px;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-buttons a:hover {
+            background: #f00;
+            transform: scale(1.1);
+        }
+
+        .social-buttons i {
+            margin: 0;
+        }
+
+        /* Media queries for responsive design */
+        @media (max-width: 900px) {
+            section span {
+                width: calc(10vw - 2px);
+                height: calc(10vw - 2px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            section span {
+                width: calc(20vw - 2px);
+                height: calc(20vw - 2px);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <section>
+        <div class="signin">
+            <div class="content">
+                <h1>Iniciar Sesión</h1>
+                <form id="loginForm" class="form">
+                    <div class="form-group">
+                        <label for="loginUsername"></label>
+                        <input type="text" id="loginUsername" name="loginUsername" placeholder="Nombre de usuario" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword"></label>
+                        <input type="password" id="loginPassword" name="loginPassword" placeholder="Contraseña" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Iniciar Sesión</button>
+                    </div>
+                    <div class="form-group register-link">
+                        <span>¿No tienes una cuenta? <a href="register.html">Regístrate aquí</a></span>
+                    </div>
+                </form>
+                <div class="social-buttons">
+                    <a href="https://www.instagram.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://discord.com" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
+                    <a href="https://www.youtube.com" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Validate user credentials
+            let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (currentUser && currentUser.username === username && currentUser.password === password) {
+                alert('Inicio de sesión exitoso.');
+                window.location.href = 'main.html'; // Redirect to the main page
+            } else {
+                alert('Nombre de usuario o contraseña incorrectos.');
+            }
+        });
+    </script>
+</body>
+</html>

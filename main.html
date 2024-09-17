@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Download Options</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Font import and global reset */
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+        /* Global reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        /* Body styling */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: #000;
+            overflow: hidden;
+        }
+
+        /* Section styles */
+        section {
+            position: relative;
+            width: 100vw;
+            height: calc(100vh - 60px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Animated gradient effect */
+        section::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(#000, #f00, #000);
+            animation: animate 5s linear infinite;
+            z-index: 1;
+        }
+
+        /* Animation keyframes */
+        @keyframes animate {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(100%);
+            }
+        }
+
+        /* Content styling */
+        .content {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            z-index: 2;
+        }
+
+        .download-options {
+            width: 100%;
+            background: #222;
+            border-radius: 8px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
+            padding: 30px;
+            color: #f1f1f1;
+            text-align: center;
+        }
+
+        .download-options h2 {
+            font-size: 2em;
+            color: #f00;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .download-options a {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 15px;
+            margin: 10px 0;
+            background: #e74c3c;
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .download-options a:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        /* Sliding menu styles */
+        .sliding-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100%;
+            background: #222;
+            color: #f1f1f1;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 3;
+            overflow-y: auto;
+        }
+
+        .sliding-menu.active {
+            transform: translateX(0);
+        }
+
+        .sliding-menu .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #333;
+            color: #f1f1f1;
+            border-bottom: 1px solid #444;
+        }
+
+        .sliding-menu .menu-header h2 {
+            margin: 0;
+        }
+
+        .sliding-menu .menu-header .close-btn {
+            cursor: pointer;
+            font-size: 1.5em;
+            color: #e74c3c;
+            transition: color 0.3s ease;
+        }
+
+        .sliding-menu .menu-header .close-btn:hover {
+            color: #c0392b;
+        }
+
+        /* Profile section in sliding menu */
+        .profile-section {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #444;
+            background: #333;
+        }
+
+        .profile-section .profile-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #f1f1f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+
+        .profile-section .profile-icon i {
+            font-size: 24px;
+            color: #000;
+        }
+
+        .profile-section .profile-picture {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #444;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            position: relative;
+        }
+
+        .profile-section .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-section .profile-info {
+            color: #f1f1f1;
+        }
+
+        .profile-section input[type="file"] {
+            display: none;
+        }
+
+        .profile-section .upload-btn {
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .profile-section .upload-btn:hover {
+            background: #c0392b;
+        }
+
+        .sliding-menu .menu-links {
+            padding: 20px;
+        }
+
+        .sliding-menu .menu-links a {
+            display: block;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #e74c3c;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .sliding-menu .menu-links a:hover {
+            background: #c0392b;
+        }
+
+        .logout-btn {
+            display: block;
+            width: calc(100% - 40px);
+            margin: 20px auto;
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #c0392b;
+        }
+
+        /* Footer styles */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-buttons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #333;
+            color: #fff;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 20px;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-buttons a:hover {
+            background: #f00;
+            transform: scale(1.1);
+        }
+
+        .social-buttons i {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="content">
+            <div class="download-options">
+                <h2>Mod Menus</h2>
+                <a href="scrips.html">Tessio Mod Menu</a>
+                <a href="product2.html">Roox</a>
+                <a href="product3.html">Stand Menu</a>
+                <a href="product4.html">Kiddions</a>
+                <a href="product5.html">mx-menu</a>
+                <a href="product6.html">amnesia-menu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sliding Menu -->
+    <div class="sliding-menu" id="slidingMenu">
+        <div class="menu-header">
+            <h2>Menu</h2>
+            <span class="close-btn" onclick="toggleMenu()">×</span>
+        </div>
+        <div class="profile-section">
+            <div class="profile-picture" id="profilePicture">
+                <div class="profile-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+            <div class="profile-info">
+                <input type="file" id="fileInput" accept="image/*" onchange="previewImage(event)">
+                <button class="upload-btn" onclick="document.getElementById('fileInput').click()">Upload Profile Picture</button>
+            </div>
+        </div>
+        <div class="menu-links">
+            <a href="tesio.html">Scrips mod menu</a>
+            <a href="venta.html">Venta de seguidores</a>
+            <a href="option3.html">Option 3</a>
+            <a href="option4.html">Option 4</a>
+            <a href="settings.html">Ajustes</a>
+        </div>
+        <button class="logout-btn" onclick="logout()">Cerrar sesión</button>
+    </div>
+
+    <!-- Button to open sliding menu -->
+    <button onclick="toggleMenu()" style="position: fixed; top: 20px; right: 20px; background: #e74c3c; color: #fff; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; z-index: 4;">☰ Open Menu</button>
+
+    <!-- Footer with social media buttons -->
+    <div class="footer">
+        <div class="social-buttons">
+            <a href="https://www.instagram.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://discord.com" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
+            <a href="https://www.youtube.com" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('slidingMenu');
+            menu.classList.toggle('active');
+        }
+
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const profilePicture = document.getElementById('profilePicture');
+                profilePicture.innerHTML = `<img src="${e.target.result}" alt="Profile Picture">`;
+            };
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function logout() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

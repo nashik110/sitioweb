@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajustes de Usuario</title>
+    <style>
+        /* Font import and global reset */
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+        /* Global reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        /* Body styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #000;
+            color: #fff;
+            padding: 20px;
+        }
+
+        /* Back button styling */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            z-index: 10;
+        }
+
+        .back-button:hover {
+            background: #c0392b;
+        }
+
+        /* Container styling */
+        .settings-container {
+            background: #222;
+            border-radius: 8px;
+            padding: 20px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
+            position: relative;
+        }
+
+        h1 {
+            color: #f00;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #f1f1f1;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"],
+        .form-group input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #444;
+            border-radius: 8px;
+            background: #333;
+            color: #fff;
+        }
+
+        .form-group input[type="file"] {
+            border: none;
+        }
+
+        .form-group button {
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .form-group button:hover {
+            background: #c0392b;
+        }
+
+        .form-group .notice {
+            color: #f1f1f1;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-button" onclick="goBack()">Volver</button>
+
+    <div class="settings-container">
+        <h1>Ajustes de Usuario</h1>
+        <form id="settingsForm">
+            <div class="form-group">
+                <label for="username">Nombre de Usuario</label>
+                <input type="text" id="username" name="username" placeholder="Nuevo nombre de usuario" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" placeholder="Nueva contraseña" required>
+            </div>
+            <div class="form-group">
+                <label for="profileImage">Foto de Perfil</label>
+                <input type="file" id="profileImage" name="profileImage" accept="image/*">
+            </div>
+            <div class="form-group">
+                <button type="submit">Guardar Cambios</button>
+            </div>
+            <div class="form-group notice">
+                <p>Recuerda actualizar tu información para mantener tu cuenta segura.</p>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Load user data from localStorage if available
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (currentUser) {
+                document.getElementById('username').value = currentUser.username;
+            }
+        });
+
+        document.getElementById('settingsForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const profileImage = document.getElementById('profileImage').files[0];
+            
+            // Validate inputs
+            if (!username || !password) {
+                alert('Nombre de usuario y contraseña son obligatorios.');
+                return;
+            }
+
+            // Get the current user data
+            let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+            // Update user data
+            if (currentUser) {
+                currentUser.username = username;
+                currentUser.password = password;
+                // Handle file upload (mockup, replace with actual upload logic)
+                if (profileImage) {
+                    currentUser.profileImage = URL.createObjectURL(profileImage);
+                }
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                alert('Cambios guardados.');
+
+                // Redirigir a la página de inicio de sesión
+                window.location.href = 'index.html';
+            } else {
+                alert('No se encontró un usuario registrado.');
+            }
+        });
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

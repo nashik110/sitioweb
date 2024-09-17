@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesión</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #000;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #222;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
+        }
+
+        h1 {
+            color: rgb(255, 0, 0);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #f1f1f1;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background: #333;
+            color: #fff;
+        }
+
+        .form-group button {
+            background: #ff0000;
+            color: #000000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .form-group button:hover {
+            background: #ffffff; 
+        }
+
+        .form-group .register-link {
+            margin-top: 10px;
+            display: block;
+            text-align: center;
+            color: #ff0000;
+        }
+
+        .form-group .register-link a {
+            color: #ff0000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .form-group .register-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Iniciar Sesión</h1>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="loginUsername"></label>
+                <input type="text" id="loginUsername" name="loginUsername" placeholder="Nombre de usuario" required>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword"></label>
+                <input type="password" id="loginPassword" name="loginPassword" placeholder="Contraseña" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Iniciar Sesión</button>
+            </div>
+            <div class="form-group register-link">
+                <span>¿No tienes una cuenta? <a href="register.html">Regístrate aquí</a></span>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Validate user credentials
+            let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (currentUser && currentUser.username === username && currentUser.password === password) {
+                alert('Inicio de sesión exitoso.');
+                window.location.href = 'main.html'; // Redirect to the main page
+            } else {
+                alert('Nombre de usuario o contraseña incorrectos.');
+            }
+        });
+    </script>
+</body>
+</html>
+
